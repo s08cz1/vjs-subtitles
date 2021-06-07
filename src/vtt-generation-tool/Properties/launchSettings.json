@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "GenerateVttWithTimings": {
+      "commandName": "Project",
+      "commandLineArgs": "1 52000"
+    }
+  }
+}
