@@ -23,15 +23,13 @@ let player = videojs('myClip', options, () => {
 });
 
 player.ready(() => {
-    const trackEl = player.addRemoteTextTrack({src: 'GOPR3467.vtt'}, false);
-    const tracks = player.remoteTextTracks(); 
-    console.log(tracks.length); // print out greater than 0
-    
-    for (let i = 0; i < tracks.length; i++) { 
-        const track = tracks[i]; // there is only one a.t.m
-        track.label = 'timings';
-        track.mode = 'showing';
-      }
+    const trackEl = player.addRemoteTextTrack({
+        src: 'GOPR3467.vtt', 
+        kind: 'captions', 
+        label: 'timings', 
+        default: true, 
+        language: 'en'
+    }, false);
   });
 
 player.src({src: 'GOPR3467.MP4', type: 'video/mp4'});
