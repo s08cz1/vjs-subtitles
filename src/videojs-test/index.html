@@ -1,8 +1,20 @@
 <head>
   <link rel="stylesheet" href="/node_modules/video.js/dist/video-js/video-js.min.css" />
   <style>
-    #waveform, #wave-timeline, #wave-minimap {
-      width: 600px;
+    #myClip .video-js.vjs-user-inactive.vjs-playing .vjs-text-track-display {
+      bottom: -32px;
+    }
+    #myClip .vjs-text-track-display {
+      bottom: -32px;
+    }
+    #myClip .vjs-text-track-cue {
+      font-size: 20px !important;
+    }
+    #myClip .vjs-text-track-cue div {
+      padding: 5px 10px;
+    }
+    .vjs-menu-item.vjs-texttrack-settings {
+      display: none;
     }
   </style>
 </head>
@@ -10,7 +22,7 @@
   <body>
     <video id="myClip" class="video-js vjs-default-skin" playsinline>
       <!-- <source src="GOPR3467.MP4" type="video/mp4">
-      <track kind="captions" src="GOPR3467.vtt" srclang="en" label="English" default> -->
-        </video>
+      <track kind="captions" src="GOPR3467.vtt" srclang="en" label="Timings" default> -->
+      </video>
     <script src="main.js"></script>
   </body>
