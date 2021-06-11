@@ -4,7 +4,7 @@ import 'video.js/dist/video-js.min.css';
 import videojs from 'video.js';
 
 // configuration for video.js
-let options = {
+const options = {
     controls: true,
     bigPlayButton: false,
     autoplay: false,
@@ -12,13 +12,14 @@ let options = {
     fluid: false,
     width: 600,
     height: 300,
-    // textTrackSettings: false // with this set to false, settings can't be set
+    // textTrackSettings: false // with this set to false, we wouldn't be able to set the settings here
 };
-let player = videojs('myClip', options, () => {
+const player = videojs('myClip', options, () => {
     // print version information at startup
-    let msg = `Using video.js ${videojs.VERSION}`;
+    const msg = `Using video.js ${videojs.VERSION}`;
     videojs.log(msg);
 });
+const captionsDiv = document.getElementById('captions');
 
 player.ready(() => {
     const settings = player.textTrackSettings;
@@ -34,13 +35,20 @@ player.ready(() => {
         'windowOpacity': '0'
     });
     settings.updateDisplay();
-    const trackEl = player.addRemoteTextTrack({
+    player.addRemoteTextTrack({
         src: 'GOPR3467.vtt', 
         kind: 'captions', 
         label: 'Timings 100ms', 
         default: true, 
         language: 'en'
     }, false);
+
+    const tracks = player.textTracks();
+    const track = tracks[0]; // very naive but in this example we know there is always one track
+    track.addEventListener('cuechange', (ev) => {
+        const cues = track.activeCues;
+        captionsDiv.innerHTML = cues[0].text; // again, very naive assumption, but in this simple example we don't care
+    });
  });
 
 player.src({src: 'GOPR3467.MP4', type: 'video/mp4'});
